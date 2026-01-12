@@ -9,3 +9,12 @@ class SchemaError(EngineError):
 class PageError(EngineError):
     """Raised for page-level errors (bounds, corruption, etc)."""
     pass
+
+class QueryError(Exception):
+    pass
+
+class ParseError(QueryError):
+    pass
+
+class ExecutionError(QueryError):
+    pass

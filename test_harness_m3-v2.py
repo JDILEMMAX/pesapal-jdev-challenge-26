@@ -35,6 +35,9 @@ def range_search(index_mgr, table, column, start_key, end_key):
             elif key_value > end_key:
                 return results
         node = node.next
+
+    # Sort results by key for consistent output
+    results.sort(key=lambda r: r[column])
     return results
 
 
@@ -59,6 +62,9 @@ def composite_range_search(index_mgr, table, columns, start_key, end_key):
             elif k > end_key:
                 return results
         node = node.next
+
+    # Sort results by composite keys for consistent output
+    results.sort(key=lambda r: tuple(r[col] for col in columns))
     return results
 
 
@@ -103,9 +109,9 @@ def main():
     for r in results:
         print(r)
 
-    # Step 6: Composite range search
-    results = composite_range_search(idx_mgr, users, ["age", "name"], (30, "A"), (30, "C"))
-    print("\nComposite range search: age=30 AND name between A-C")
+    # Step 6: Composite range search (adjusted end key to include 'Charlie')
+    results = composite_range_search(idx_mgr, users, ["age", "name"], (30, "A"), (30, "Charlie"))
+    print("\nComposite range search: age=30 AND name between A-Charlie")
     for r in results:
         print(r)
 

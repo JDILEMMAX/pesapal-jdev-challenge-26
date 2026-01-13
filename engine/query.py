@@ -1,7 +1,12 @@
 from typing import List
 
 from engine.sql.ast import Select, Insert, CreateTable
-from engine.planner.logical import LogicalScan, LogicalFilter, LogicalProjection, LogicalInsert
+from engine.planner.logical import (
+    LogicalScan,
+    LogicalFilter,
+    LogicalProjection,
+    LogicalInsert,
+)
 from engine.executor.scan import TableScan
 from engine.executor.filter import Filter
 from engine.executor.projection import Projection
@@ -10,9 +15,11 @@ from engine.exceptions import QueryError
 from engine.catalog.column import Column
 from engine.catalog.table import Table
 
+
 # --- Minimal catalog for Milestone 2 ---
 class Catalog:
     """Tracks tables and their data using StorageEngine."""
+
     def __init__(self, storage):
         self.storage = storage  # StorageEngine instance
 
@@ -23,6 +30,7 @@ class Catalog:
         if table_name not in self.storage.tables:
             raise QueryError(f"Table '{table_name}' does not exist")
         return table_name  # For executors, we just pass the table name
+
 
 # ---------- PLANNING ----------
 def build_plan(ast):
@@ -41,6 +49,7 @@ def build_plan(ast):
 
     raise QueryError(f"Unsupported AST node: {type(ast)}")
 
+
 # ---------- EXECUTION ----------
 def execute_plan(plan, catalog: Catalog) -> List[dict]:
     """Execute a logical plan or AST node using the catalog/storage engine."""
@@ -57,6 +66,7 @@ def execute_plan(plan, catalog: Catalog) -> List[dict]:
     # SELECT / Filter / Projection
     executor = _build_executor(plan, catalog)
     return executor.execute()
+
 
 # ---------- HELPER: build executor tree ----------
 def _build_executor(plan, catalog: Catalog):

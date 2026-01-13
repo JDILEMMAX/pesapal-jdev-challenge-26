@@ -1,5 +1,6 @@
 # engine/planner/cost.py
 
+
 def estimate_cost(table, indexed=False):
     """
     Simple cost estimator:

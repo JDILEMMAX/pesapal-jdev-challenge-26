@@ -2,11 +2,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Any, Type
 
+
 @dataclass(frozen=True)
 class ColumnSchema:
     name: str
     dtype: Type
     nullable: bool = False
+
 
 @dataclass
 class TableSchema:

@@ -4,6 +4,7 @@ import time
 from engine.transaction.transaction import Transaction
 from engine.transaction.lock_manager import LockManager
 
+
 # --- Mock table structure from Milestone 3 ---
 class Table:
     def __init__(self, name):
@@ -29,8 +30,10 @@ class Table:
     def __str__(self):
         return f"Table({self.name}, rows={self.rows})"
 
+
 # --- Initialize table ---
 users_table = Table("users")
+
 
 # --- Worker functions ---
 def writer_worker(row):
@@ -42,6 +45,7 @@ def writer_worker(row):
         print(f"Transaction {txn.txn_id} failed: {e}")
         txn.rollback()
 
+
 def reader_worker(reader_id):
     # Simulate a read transaction
     for _ in range(3):  # read multiple times
@@ -50,6 +54,7 @@ def reader_worker(reader_id):
         LockManager().release_read(users_table.name)
         print(f"[Reader-{reader_id}] Read {len(rows)} rows: {rows}")
         time.sleep(0.1)  # simulate processing time
+
 
 # --- Start concurrent writers ---
 num_writers = 10
@@ -64,7 +69,7 @@ for i in range(num_writers):
 num_readers = 3
 reader_threads = []
 for i in range(num_readers):
-    t = threading.Thread(target=reader_worker, args=(i+1,))
+    t = threading.Thread(target=reader_worker, args=(i + 1,))
     reader_threads.append(t)
     t.start()
 

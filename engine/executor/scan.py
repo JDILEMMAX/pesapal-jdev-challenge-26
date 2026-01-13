@@ -1,5 +1,6 @@
 from .base import Executor
 
+
 class TableScan(Executor):
     def __init__(self, storage_engine, table_name):
         self.storage_engine = storage_engine

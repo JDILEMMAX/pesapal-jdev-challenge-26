@@ -8,6 +8,7 @@ from engine.transaction.log import WALog
 lock_manager = LockManager()
 wal = WALog()
 
+
 class Transaction:
     def __init__(self):
         self.txn_id = str(uuid.uuid4())
@@ -24,7 +25,7 @@ class Transaction:
         try:
             # Log the action first (WAL) using table name (JSON serializable)
             wal.log(self.txn_id, "INSERT", table.name, row)
-            
+
             # Perform the insert
             table.insert(row)
 

@@ -110,7 +110,9 @@ def main():
         print(r)
 
     # Step 6: Composite range search (adjusted end key to include 'Charlie')
-    results = composite_range_search(idx_mgr, users, ["age", "name"], (30, "A"), (30, "Charlie"))
+    results = composite_range_search(
+        idx_mgr, users, ["age", "name"], (30, "A"), (30, "Charlie")
+    )
     print("\nComposite range search: age=30 AND name between A-Charlie")
     for r in results:
         print(r)

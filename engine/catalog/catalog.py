@@ -2,10 +2,12 @@ from typing import Dict
 from engine.catalog.table import Table
 from engine.exceptions import EngineError
 
+
 class Catalog:
     """
     Central registry for all tables in the engine.
     """
+
     def __init__(self):
         self.tables: Dict[str, Table] = {}
 

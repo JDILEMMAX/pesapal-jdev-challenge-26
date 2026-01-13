@@ -1,5 +1,6 @@
 from .base import Executor
 
+
 class InsertExecutor(Executor):
     def __init__(self, storage_engine, table, values):
         self.storage_engine = storage_engine

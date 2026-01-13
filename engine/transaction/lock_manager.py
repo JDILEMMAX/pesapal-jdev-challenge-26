@@ -1,6 +1,7 @@
 import threading
 from collections import defaultdict
 
+
 class LockManager:
     def __init__(self):
         self.locks = defaultdict(lambda: {"readers": 0, "writer": None})
@@ -20,7 +21,10 @@ class LockManager:
 
     def acquire_write(self, resource_id, txn_id):
         with self.condition:
-            while self.locks[resource_id]["writer"] not in (None, txn_id) or self.locks[resource_id]["readers"] > 0:
+            while (
+                self.locks[resource_id]["writer"] not in (None, txn_id)
+                or self.locks[resource_id]["readers"] > 0
+            ):
                 self.condition.wait()
             self.locks[resource_id]["writer"] = txn_id
 

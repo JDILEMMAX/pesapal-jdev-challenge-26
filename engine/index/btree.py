@@ -3,6 +3,7 @@
 from .node import Node
 import bisect
 
+
 class BPlusTree:
     def __init__(self, order=4):
         self.root = Node(is_leaf=True)
@@ -40,8 +41,8 @@ class BPlusTree:
         if split_info:
             # Root split
             new_root = Node(is_leaf=False)
-            new_root.keys = [split_info['key']]
-            new_root.children = [root, split_info['new_node']]
+            new_root.keys = [split_info["key"]]
+            new_root.children = [root, split_info["new_node"]]
             self.root = new_root
 
     def _insert_recursive(self, node, key, value):
@@ -59,9 +60,9 @@ class BPlusTree:
             split_info = self._insert_recursive(node.children[i], key, value)
             if split_info:
                 # Insert new key and child reference
-                insert_i = bisect.bisect_right(node.keys, split_info['key'])
-                node.keys.insert(insert_i, split_info['key'])
-                node.children.insert(insert_i + 1, split_info['new_node'])
+                insert_i = bisect.bisect_right(node.keys, split_info["key"])
+                node.keys.insert(insert_i, split_info["key"])
+                node.children.insert(insert_i + 1, split_info["new_node"])
                 if node.is_full(self.order):
                     return self._split_internal(node)
             return None
@@ -79,17 +80,17 @@ class BPlusTree:
         leaf.next = new_leaf
 
         # Return first key of new leaf for parent
-        return {'key': new_leaf.keys[0], 'new_node': new_leaf}
+        return {"key": new_leaf.keys[0], "new_node": new_leaf}
 
     def _split_internal(self, node):
         mid = len(node.keys) // 2
         new_node = Node(is_leaf=False)
-        new_node.keys = node.keys[mid + 1:]
-        new_node.children = node.children[mid + 1:]
+        new_node.keys = node.keys[mid + 1 :]
+        new_node.children = node.children[mid + 1 :]
 
         mid_key = node.keys[mid]
 
         node.keys = node.keys[:mid]
-        node.children = node.children[:mid + 1]
+        node.children = node.children[: mid + 1]
 
-        return {'key': mid_key, 'new_node': new_node}
+        return {"key": mid_key, "new_node": new_node}

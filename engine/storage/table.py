@@ -2,6 +2,7 @@
 
 from typing import List, Dict
 
+
 class Table:
     def __init__(self, name: str, columns: List[str]):
         self.name = name

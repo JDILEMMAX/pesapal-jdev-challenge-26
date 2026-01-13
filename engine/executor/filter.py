@@ -1,6 +1,7 @@
 from .base import Executor
 from engine.sql.ast import BinaryExpression
 
+
 class Filter(Executor):
     def __init__(self, source: Executor, predicate: BinaryExpression):
         self.source = source

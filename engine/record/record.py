@@ -1,11 +1,13 @@
 from typing import List
 from engine.record.schema import TableSchema
 
+
 class Record:
     """
     Encodes and decodes records according to a TableSchema.
     Uses simple length-prefixed binary encoding.
     """
+
     def __init__(self, schema: TableSchema):
         self.schema = schema
 
@@ -23,13 +25,14 @@ class Record:
             else:
                 encoded.append(1)  # not null
                 if isinstance(value, int):
-                    encoded += value.to_bytes(8, 'big', signed=True)
+                    encoded += value.to_bytes(8, "big", signed=True)
                 elif isinstance(value, float):
                     import struct
-                    encoded += struct.pack('>d', value)
+
+                    encoded += struct.pack(">d", value)
                 elif isinstance(value, str):
-                    b = value.encode('utf-8')
-                    encoded += len(b).to_bytes(2, 'big') + b
+                    b = value.encode("utf-8")
+                    encoded += len(b).to_bytes(2, "big") + b
                 else:
                     raise TypeError(f"Unsupported column type: {type(value)}")
         return bytes(encoded)
@@ -50,16 +53,17 @@ class Record:
                 row.append(None)
                 continue
             if col.dtype == int:
-                row.append(int.from_bytes(data[idx:idx+8], 'big', signed=True))
+                row.append(int.from_bytes(data[idx : idx + 8], "big", signed=True))
                 idx += 8
             elif col.dtype == float:
                 import struct
-                row.append(struct.unpack('>d', data[idx:idx+8])[0])
+
+                row.append(struct.unpack(">d", data[idx : idx + 8])[0])
                 idx += 8
             elif col.dtype == str:
-                length = int.from_bytes(data[idx:idx+2], 'big')
+                length = int.from_bytes(data[idx : idx + 2], "big")
                 idx += 2
-                row.append(data[idx:idx+length].decode('utf-8'))
+                row.append(data[idx : idx + length].decode("utf-8"))
                 idx += length
             else:
                 raise TypeError(f"Unsupported column type: {col.dtype}")

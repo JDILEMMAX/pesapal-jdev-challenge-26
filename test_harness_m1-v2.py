@@ -11,6 +11,7 @@ from engine.catalog.catalog import Catalog
 from engine.record.page_layout import RowPage
 from engine.storage.page import Page
 
+
 def run_multi_row_test():
     print("=== Multi-Row Per Page Test ===")
 
@@ -28,7 +29,7 @@ def run_multi_row_test():
     columns = [
         ColumnSchema("id", int, False),
         ColumnSchema("name", str, False),
-        ColumnSchema("balance", float, True)
+        ColumnSchema("balance", float, True),
     ]
     schema = TableSchema(columns)
     record_handler = Record(schema)
@@ -39,7 +40,7 @@ def run_multi_row_test():
         [2, "Bob", None],
         [3, "Charlie", 250.0],
         [4, "Diana", 400.75],
-        [5, "Eve", 50.25]
+        [5, "Eve", 50.25],
     ]
 
     # Keep track of pages used
@@ -72,6 +73,7 @@ def run_multi_row_test():
     os.unlink(file_path)
     print("\nTemporary storage file removed.")
     print("=== Multi-Row Test Complete ===")
+
 
 if __name__ == "__main__":
     run_multi_row_test()

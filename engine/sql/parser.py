@@ -2,6 +2,7 @@ from typing import List
 from .tokenizer import Token, TokenType
 from .ast import *
 
+
 class Parser:
     def __init__(self, tokens: List[Token]):
         self.tokens = tokens
@@ -18,7 +19,9 @@ class Parser:
     def _expect(self, token_type: TokenType, value: str = None) -> Token:
         tok = self._advance()
         if tok.type != token_type or (value and tok.value.upper() != value.upper()):
-            raise SyntaxError(f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'")
+            raise SyntaxError(
+                f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+            )
         return tok
 
     def parse(self) -> ASTNode:

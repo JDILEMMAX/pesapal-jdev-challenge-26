@@ -1,5 +1,6 @@
 from .base import Executor
 
+
 class Projection(Executor):
     def __init__(self, source: Executor, columns):
         self.source = source

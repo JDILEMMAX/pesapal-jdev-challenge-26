@@ -1,6 +1,7 @@
 from enum import Enum, auto
 from typing import List, NamedTuple
 
+
 class TokenType(Enum):
     KEYWORD = auto()
     IDENTIFIER = auto()
@@ -8,12 +9,15 @@ class TokenType(Enum):
     LITERAL = auto()
     EOF = auto()
 
+
 class Token(NamedTuple):
     type: TokenType
     value: str
 
+
 KEYWORDS = {"CREATE", "TABLE", "INSERT", "INTO", "VALUES", "SELECT", "FROM", "WHERE"}
 SYMBOLS = {"(", ")", ",", ";", "=", "<", ">"}
+
 
 class Tokenizer:
     def __init__(self, sql: str):
@@ -42,8 +46,10 @@ class Tokenizer:
                 start = self.pos
                 while self._peek().isalnum() or self._peek() == "_":
                     self._advance()
-                word = self.sql[start:self.pos].upper()
-                token_type = TokenType.KEYWORD if word in KEYWORDS else TokenType.IDENTIFIER
+                word = self.sql[start : self.pos].upper()
+                token_type = (
+                    TokenType.KEYWORD if word in KEYWORDS else TokenType.IDENTIFIER
+                )
                 tokens.append(Token(token_type, word))
             elif current.isdigit() or current == "'":
                 if current == "'":
@@ -53,14 +59,14 @@ class Tokenizer:
                         self._advance()
                     if not self._peek():
                         raise SyntaxError("Unterminated string literal")
-                    literal = self.sql[start:self.pos]
+                    literal = self.sql[start : self.pos]
                     self._advance()
                     tokens.append(Token(TokenType.LITERAL, literal))
                 else:
                     start = self.pos
                     while self._peek().isdigit():
                         self._advance()
-                    tokens.append(Token(TokenType.LITERAL, self.sql[start:self.pos]))
+                    tokens.append(Token(TokenType.LITERAL, self.sql[start : self.pos]))
             elif current in SYMBOLS:
                 tokens.append(Token(TokenType.SYMBOL, current))
                 self._advance()

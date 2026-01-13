@@ -2,11 +2,13 @@ from pathlib import Path
 from typing import Union
 from engine.exceptions import EngineError
 
+
 class FileManager:
     """
     Handles low-level file operations for the storage engine.
     Manages reading/writing pages to disk.
     """
+
     def __init__(self, path: Union[str, Path]):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -20,7 +22,7 @@ class FileManager:
                 data = f.read(page_size)
                 if len(data) < page_size:
                     # pad with zeros if file is smaller than requested
-                    data += b'\x00' * (page_size - len(data))
+                    data += b"\x00" * (page_size - len(data))
                 return data
         except Exception as e:
             raise EngineError(f"Failed to read page {page_num}") from e

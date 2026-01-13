@@ -5,6 +5,7 @@ from engine.storage.table import Table  # Milestone 2 table
 from engine.index.index_manager import IndexManager
 from engine.planner import cost
 
+
 def range_search(index_mgr, table, column, start_key, end_key):
     """
     Perform a range search on a single-column B+ Tree index.

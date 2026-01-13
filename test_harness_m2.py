@@ -3,12 +3,14 @@ from engine.sql.parser import Parser
 from engine.storage_engine import StorageEngine
 from engine.query import build_plan, execute_plan, Catalog
 
+
 # --- Helper function: parse SQL into AST ---
 def parse_sql(sql: str):
     tokenizer = Tokenizer(sql)
     tokens = tokenizer.tokenize()
     parser = Parser(tokens)
     return parser.parse()
+
 
 # --- Test harness ---
 def main():
@@ -22,7 +24,7 @@ def main():
         "INSERT INTO users VALUES (2, 'Bob', 25);",
         "INSERT INTO users VALUES (3, 'Charlie', 35);",
         "SELECT id, name FROM users;",
-        "SELECT name, age FROM users WHERE age > 28;"
+        "SELECT name, age FROM users WHERE age > 28;",
     ]
 
     for sql in sql_statements:
@@ -39,6 +41,7 @@ def main():
                 print("Executed successfully (no output).")
         except Exception as e:
             print("Error:", e)
+
 
 if __name__ == "__main__":
     main()

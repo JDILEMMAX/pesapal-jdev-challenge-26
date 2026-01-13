@@ -2,10 +2,12 @@ from engine.storage.page import Page
 from engine.storage.file_manager import FileManager
 from typing import Dict
 
+
 class Pager:
     """
     Manages page caching and coordination between memory and disk.
     """
+
     def __init__(self, file_manager: FileManager, page_size: int = 4096):
         self.file_manager = file_manager
         self.page_size = page_size

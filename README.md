@@ -136,21 +136,41 @@ http://127.0.0.1:8000/
 
 ---
 
-## 4. Query API Endpoint
+## 4. Query API Endpoint (Updated)
 
-The database engine is exposed via a single authenticated HTTP endpoint:
+The database engine is exposed via a single authenticated HTTP endpoint supporting both GET and POST requests:
 
 ```
 GET /api/query/?q=<SQL_STATEMENT>
+POST /api/query/  (JSON body: {"query": "<SQL_STATEMENT>"})
 ```
 
 ### Request Flow
 
 1. HTTP request hits Django
 2. `query_endpoint` validates input and authentication
-3. SQL is passed verbatim to the session layer
-4. Session executes the query against the engine
-5. Result is returned as JSON
+3. SQL is extracted from either POST JSON body or GET query param
+4. SQL is passed verbatim to the session layer
+5. Session executes the query against the engine
+6. Result is returned as JSON
+7. Live logging prints query and result to console; errors are written to log file
+
+### Example curl Requests
+
+**GET:**
+
+```bash
+curl -X GET "http://127.0.0.1:8000/api/query/?q=SELECT%20*%20FROM%20users" -H "Authorization: Bearer <token>"
+```
+
+**POST:**
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/query/ \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <token>" \
+     -d '{"query": "SELECT * FROM users"}'
+```
 
 ---
 
@@ -164,8 +184,12 @@ CREATE TABLE users (id, name, age);
 
 ### Example HTTP Request
 
-```
-GET /api/query/?q=CREATE%20TABLE%20users%20(id,%20name,%20age);
+**POST:**
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/query/ \
+     -H "Content-Type: application/json" \
+     -d '{"query": "CREATE TABLE users (id, name, age)"}'
 ```
 
 ### Engine Behavior
@@ -179,7 +203,7 @@ GET /api/query/?q=CREATE%20TABLE%20users%20(id,%20name,%20age);
 ```json
 {
   "status": "OK",
-  "data": []
+  "data": {"status": "OK"}
 }
 ```
 
@@ -195,8 +219,12 @@ INSERT INTO users VALUES (1, 'Alice', 30);
 
 ### Example HTTP Request
 
-```
-GET /api/query/?q=INSERT%20INTO%20users%20VALUES%20(1,%20'Alice',%2030);
+**POST:**
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/query/ \
+     -H "Content-Type: application/json" \
+     -d '{"query": "INSERT INTO users VALUES (1, 'Alice', 30)"}'
 ```
 
 ### Engine Behavior
@@ -227,8 +255,12 @@ SELECT * FROM users;
 
 ### Example HTTP Request
 
-```
-GET /api/query/?q=SELECT%20*%20FROM%20users;
+**POST:**
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/query/ \
+     -H "Content-Type: application/json" \
+     -d '{"query": "SELECT * FROM users"}'
 ```
 
 ### Example Response
@@ -248,6 +280,7 @@ GET /api/query/?q=SELECT%20*%20FROM%20users;
 
 ### Notes
 
+* Both GET and POST methods are supported
 * Only `SELECT * FROM <table>` is supported at this stage
 * Filtering, projections, and joins are planned for later milestones
 
@@ -259,8 +292,7 @@ All query requests are protected by a lightweight authentication decorator:
 
 ```python
 @auth_required
-def query_endpoint(request):
-    ...
+def query_endpoint(request): ...
 ```
 
 This ensures:
@@ -274,19 +306,40 @@ This ensures:
 
 Currently:
 
-* Engine raises generic exceptions
-* Django returns HTTP 500 for engine failures
+* Engine raises structured exceptions: `ParseError`, `SchemaError`, `ExecutionError`, `EngineError`
+* Django maps these to HTTP 400 responses
+* Unexpected exceptions result in HTTP 500 responses
 
-Example error response:
+### Example Error Responses
+
+**Engine Error:**
 
 ```json
 {
   "status": "ERROR",
-  "message": "Table users does not exist"
+  "error": {"type": "EngineError", "message": "Table users does not exist"}
 }
 ```
 
-Typed engine exceptions and HTTP-level error mapping will be introduced in **Milestone 6**.
+**Invalid JSON or No Query:**
+
+```json
+{
+  "status": "ERROR",
+  "error": {"type": "InvalidRequest", "message": "No query provided"}
+}
+```
+
+**Internal Server Error:**
+
+```json
+{
+  "status": "ERROR",
+  "error": {"type": "InternalError", "message": "An unexpected error occurred."}
+}
+```
+
+*Live console logging shows query, success, and errors; all errors are also written to a rotating log file.*
 
 ---
 

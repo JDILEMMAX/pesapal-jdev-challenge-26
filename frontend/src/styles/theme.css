@@ -1,0 +1,309 @@
+/* --------------------------------------------- */
+/* Global Variables */
+/* --------------------------------------------- */
+:root {
+  --bg-color: #0f111a;
+  --main-bg: #1e1e1e;
+  --panel-bg: #252526;
+  --text-color: #d4d4d4;
+  --highlight-color: #ff8800; /* subtle neon orange accent */
+  --highlight-color-2: #39ff14;
+  --header-color: #4fc3f7;
+  --error-color: #ff5370;
+  --border-color: #0e639c;
+  --font: 'Consolas, Menlo, Monaco, monospace';
+}
+
+/* --------------------------------------------- */
+/* Reset & Global */
+/* --------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font);
+  overflow: hidden;
+}
+
+/* --------------------------------------------- */
+/* App Layout */
+/* --------------------------------------------- */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: var(--main-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Panels */
+.panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------- */
+/* SQL Editor */
+/* --------------------------------------------- */
+.sql-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.sql-editor-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--header-color);
+  font-weight: bold;
+}
+
+.sql-editor-shortcut {
+  font-size: 11px;
+  color: #6a6a6a;
+}
+
+/* Textarea / Editor */
+.sql-editor textarea {
+  flex: 1;
+  resize: none;
+  background: var(--panel-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 10px;
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  outline: none;
+  caret-color: var(--header-color);
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.sql-editor textarea:focus {
+  box-shadow: 0 0 8px var(--header-color);
+  /* border-color: var(--highlight-color); */
+}
+
+/* Footer */
+.sql-editor-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.sql-editor-footer button {
+  background: var(--border-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  /* font-size: 13px; */
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.sql-editor-footer button:hover:not(:disabled) {
+  /* background: var(--highlight-color); */
+  color: #000;
+  /* box-shadow: 0 0 5px var(--highlight-color); */
+}
+
+.sql-editor-footer button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------- */
+/* ResultGrid */
+/* --------------------------------------------- */
+.result-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Panel Header */
+.result-grid h3 {
+  color: var(--header-color);
+  font-weight: bold;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Table Wrapper for scroll */
+.result-table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 50vh;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+/* Table */
+.result-grid table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+}
+
+/* Table Header */
+.result-grid th {
+  background: var(--border-color);
+  color: #fff;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #252526;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Optional: hover highlight for headers */
+.result-grid th:hover {
+  /* background: var(--highlight-color); */
+  color: #000;
+  cursor: pointer;
+}
+
+/* Table Body Cells */
+.result-grid td {
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-bottom: 1px solid #252526;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Row Striping */
+.result-grid tr:nth-child(even) {
+  background: #1b1b2b;
+}
+
+.result-grid tr:nth-child(odd) {
+  background: #1e1e3a;
+}
+
+/* Optional: hover glow on rows */
+.result-grid tbody tr:hover {
+  background: #0e639c33; /* subtle overlay */
+  /* box-shadow: inset 0 0 5px var(--highlight-color); */
+}
+
+/* Error Message Styling */
+.error-message {
+  color: var(--error-color);
+  background: #1a1a2e;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: var(--font);
+  /* font-size: 14px; */
+}
+
+.info-message {
+  color: var(--highlight-color-2);
+  background: #1a1a2e;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: var(--font);
+  /* font-size: 14px; */
+}
+
+/* --- TableList --- */
+.table-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.table-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.table-list-header h3 {
+  /* font-size: 14px; */
+  font-weight: 600;
+  color: var(--header-color);
+  letter-spacing: 0.4px;
+}
+
+.table-list-meta {
+  font-size: 11px;
+  color: #7a7a7a;
+}
+
+/* Body */
+.table-list-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Empty State */
+.table-list-empty {
+  font-size: 12px;
+  color: #6a6a6a;
+  padding: 8px;
+  font-style: italic;
+}
+
+/* List */
+.table-list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table-list-item {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Hover & Focus */
+.table-list-item:hover,
+.table-list-item:focus {
+  background: rgba(79, 195, 247, 0.12);
+  outline: none;
+}
+
+/* Active / Selected (future-ready) */
+.table-list-item.active {
+  background: rgba(79, 195, 247, 0.22);
+  color: #ffffff;
+}

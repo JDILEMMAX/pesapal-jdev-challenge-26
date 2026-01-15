@@ -37,13 +37,16 @@ A standalone REPL is provided for direct database interaction.
 
 ### Web App
 
-* Start Django backend
-* Start React frontend
-* Access via browser
+The system consists of **two independently running services**:
+
+1. **Django backend** – exposes the database engine via HTTP
+2. **React frontend** – provides a technical UI for issuing SQL queries
+
+Both must be running for the full web experience.
 
 ---
 
-# Database Engine Usage & Django Integration
+# Database Engine Usage: Django & React Integration
 
 This section explains how to:
 
@@ -174,7 +177,120 @@ curl -X POST http://127.0.0.1:8000/api/query/ \
 
 ---
 
-## 5. Creating Tables
+## 5. React Frontend
+
+This milestone introduces a **React-based, developer-oriented frontend** designed to interact directly with the custom database engine through the Django API layer.
+
+The frontend prioritizes:
+
+* Precision and clarity over visual noise
+* Full visibility into query execution and results
+* A consistent, high-contrast technical aesthetic
+* Strict separation between UI and backend concerns
+
+### Frontend Architecture
+
+```
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── SqlEditor.jsx      # SQL input + execution controls
+│   │   ├── ResultGrid.jsx     # Tabular query result display
+│   │   ├── TableList.jsx      # Schema/navigation panel (UI-only for now)
+│   ├── pages/
+│   │   └── Dashboard.jsx     # Main application layout
+│   ├── api/
+│   │   └── dbClient.js       # HTTP client for query execution
+│   └── styles/
+│       └── theme.css         # Centralized application styling
+```
+
+* **Dashboard** defines the application layout
+* **SqlEditor** captures and submits SQL queries
+* **ResultGrid** renders query results and errors
+* **TableList** (UI-only for now) represents schema visibility
+
+### Layout Model
+
+The UI follows a fixed, full-viewport layout:
+
+* **Sidebar** – table/schema visibility
+* **Main workspace** – SQL editor and query results
+
+This structure is enforced via shared layout classes:
+
+```css
+.app-container
+.sidebar
+.main-content
+```
+
+All components inherit global styling from `theme.css` to ensure visual consistency.
+
+---
+
+### 5.1 SQL Editor
+
+The SQL editor is a controlled component with:
+
+* Multi-line SQL input
+* Keyboard shortcut support (`Ctrl / Cmd + Enter`)
+* Execution state awareness
+* Minimal inline logic; styling is fully inherited from `theme.css`
+
+Execution flow:
+
+1. User submits SQL
+2. Frontend sends request via `dbClient`
+3. Django forwards SQL to the engine
+4. Result or error is rendered in the ResultGrid
+
+### 5.2 Result Grid
+
+Query results are rendered dynamically based on response type:
+
+* **Tabular output** for `SELECT` queries
+* **Status-only responses** for `CREATE`, `INSERT`, etc.
+* **Structured error output** when execution fails
+
+The grid is scrollable, schema-driven, and styled for dense data inspection.
+
+### 5.3 Table List (UI Stub)
+
+`TableList` is currently a **presentation-only component**:
+
+* No backend calls
+* No mock data
+* Acts as a visual contract for upcoming catalog APIs
+
+Backend support (e.g. `SHOW TABLES`) will be introduced in a later milestone.
+
+### Styling & Theming
+
+All frontend styling is centralized in `theme.css`:
+
+* CSS variables define color, typography, spacing, and accents
+* Components avoid inline styles
+* Accent colors are deliberately subdued to keep focus on data
+
+This ensures consistency and prevents visual drift as the UI grows.
+
+---
+
+### Running the Frontend
+
+From the `frontend/` directory:
+
+```bash
+npm install
+npm run dev
+```
+
+The React app will start on its own development server and communicate with Django via the configured API base URL.
+
+---
+
+## 6. Creating Tables
 
 ### SQL Syntax
 
@@ -209,7 +325,7 @@ curl -X POST http://127.0.0.1:8000/api/query/ \
 
 ---
 
-## 6. Inserting Data
+## 7. Inserting Data
 
 ### SQL Syntax
 
@@ -245,7 +361,7 @@ curl -X POST http://127.0.0.1:8000/api/query/ \
 
 ---
 
-## 7. Retrieving Data
+## 8. Retrieving Data
 
 ### SQL Syntax
 
@@ -286,7 +402,7 @@ curl -X POST http://127.0.0.1:8000/api/query/ \
 
 ---
 
-## 8. Authentication Layer
+## 9. Authentication Layer
 
 All query requests are protected by a lightweight authentication decorator:
 
@@ -302,7 +418,7 @@ This ensures:
 
 ---
 
-## 9. Error Handling
+## 10. Error Handling
 
 Currently:
 
@@ -343,7 +459,7 @@ Currently:
 
 ---
 
-## 10. Important Notes & Limitations
+## 11. Important Notes & Limitations
 
 * This engine is **not transactional yet**
 * Data persistence is minimal and evolving
@@ -354,7 +470,7 @@ Warnings about unapplied Django migrations can be safely ignored for this projec
 
 ---
 
-## 11. Summary
+## 12. Summary
 
 This milestone establishes a clean and extensible foundation:
 

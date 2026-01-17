@@ -1,6 +1,10 @@
 # app/db/session.py
 from .connection import get_engine
 from engine.exceptions import EngineError
+from engine.sql.tokenizer import Tokenizer
+from engine.sql.parser import Parser
+from .query import build_plan, execute_plan
+from engine.sql.ast import ShowTables
 
 
 class Session:
@@ -9,72 +13,51 @@ class Session:
 
     def execute(self, sql: str):
         """
-        Execute a minimal subset of SQL against the StorageEngine.
+        Execute SQL using the real parser + executor.
 
-        Supported:
-        - CREATE TABLE table (col1, col2, ...)
-        - INSERT INTO table VALUES (v1, v2, ...)
-        - SELECT * FROM table
+        Supports:
+        - CREATE TABLE with column types
+        - INSERT INTO
+        - SELECT with optional columns & WHERE
+        - SHOW TABLES
         """
 
         if not sql or not sql.strip():
             raise ValueError("Empty SQL statement")
 
-        # --- Normalize SQL ---
-        sql = sql.strip().rstrip(";")
-        tokens = sql.split()
-        command = tokens[0].upper()
+        sql = sql.strip()
+        missing_semicolon = not sql.endswith(";")
 
         try:
-            if command == "CREATE":
-                # CREATE TABLE table_name (col1, col2)
-                table_name = tokens[2]
+            tokenizer = Tokenizer(sql)
+            tokens = tokenizer.tokenize()
+            parser = Parser(tokens)
+            ast = parser.parse()
 
-                columns = (
-                    sql.split("(", 1)[1]
-                    .rsplit(")", 1)[0]
-                    .replace(" ", "")
-                    .split(",")
-                )
-
-                self.engine.create_table(table_name, columns)
-                return {"status": "OK"}
-
-            elif command == "INSERT":
-                # INSERT INTO table_name VALUES (v1, v2)
-                table_name = tokens[2]
-
-                values_str = (
-                    sql.split("VALUES", 1)[1]
-                    .strip()
-                    .lstrip("(")
-                    .rstrip(")")
-                )
-
-                # NOTE: eval is acceptable here for milestone scope,
-                # but should be replaced later with a real parser.
-                values = [eval(v) for v in values_str.split(",")]
-
-                self.engine.insert_row(table_name, values)
-                return {"status": "OK"}
-
-            elif command == "SELECT":
-                # SELECT * FROM table_name
-                table_name = tokens[3]
-                return self.engine.get_rows(table_name)
-
+            # Execute
+            if isinstance(ast, ShowTables):
+                data = [
+                    {"table_name": name}
+                    for name in self.engine.catalog.list_tables()
+                ]
             else:
-                raise ValueError(f"Unsupported SQL command: {command}")
+                plan = build_plan(ast)
+                data = execute_plan(plan, self.engine)
+
+            # Always normalize here
+            result = {"data": data}
+
+            # Include warning if semicolon was missing
+            if missing_semicolon:
+                result["warning"] = "Consider ending your SQL with a semicolon (;)"
+
+            return result
 
         except EngineError:
-            # Re-raise engine errors unchanged (clean separation)
             raise
-
         except Exception as e:
-            # Wrap unexpected issues as execution errors
             raise RuntimeError(f"SQL execution failed: {e}") from e
 
-
 def get_session():
-    """Factory function expected by Django views"""
+    """Factory for Django views"""
     return Session()

@@ -3,7 +3,7 @@
 import os
 import sys
 
-# Helps import the engine module from the project root as 'engine.storage_engine'
+# Helps import the engine module from the project root as 'engine.engine'
 # Adds project root to PYTHONPATH
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT_DIR not in sys.path:

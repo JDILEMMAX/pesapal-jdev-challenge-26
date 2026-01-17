@@ -9,15 +9,43 @@ class Filter(Executor):
 
     def execute(self):
         rows = self.source.execute()
-        col = self.predicate.left.name
+        col_name = self.predicate.left.name
         op = self.predicate.operator
-        val = self.predicate.right.value
+        literal = self.predicate.right.value
         result = []
+
+        table = self.source.table  # now works
+
         for row in rows:
-            if op == "=" and row[col] == val:
+            if self._compare(row, col_name, op, literal, table):
                 result.append(row)
-            elif op == "<" and row[col] < val:
-                result.append(row)
-            elif op == ">" and row[col] > val:
-                result.append(row)
+
         return result
+
+    def _compare(self, row, col_name, op, literal, table):
+        # Find the column schema
+        column_schema = next(
+            (c for c in table.schema.columns if c.name.upper() == col_name.upper()), None
+        )
+        if column_schema is None:
+            raise ValueError(f"Column {col_name} does not exist in table {table.name}")
+
+        # Coerce literal to correct type
+        literal_value = column_schema.dtype(literal)
+        row_value = row[col_name]
+
+        # Perform comparison
+        if op == "=":
+            return row_value == literal_value
+        elif op == "<":
+            return row_value < literal_value
+        elif op == ">":
+            return row_value > literal_value
+        elif op == "<=":
+            return row_value <= literal_value
+        elif op == ">=":
+            return row_value >= literal_value
+        elif op == "!=":
+            return row_value != literal_value
+        else:
+            raise ValueError(f"Unsupported operator: {op}")

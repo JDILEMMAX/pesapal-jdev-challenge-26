@@ -1,6 +1,7 @@
 from engine.storage.page import Page
 from engine.storage.file_manager import FileManager
-from typing import Dict
+from typing import Dict, Iterator
+from engine.exceptions import EngineError
 
 
 class Pager:
@@ -34,3 +35,16 @@ class Pager:
             return
         page = self.cache[page_num]
         self.file_manager.write_page(page_num, page.data)
+
+    def iter_pages(self, file_id: int) -> Iterator[Page]:
+        page_num = file_id
+
+        while True:
+            page = self.get_page(page_num)
+
+            # empty page → stop
+            if all(b == 0 for b in page.data):
+                break
+
+            yield page
+            page_num += 1

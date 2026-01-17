@@ -166,6 +166,7 @@ html, body, #root {
   max-height: 50vh;
   border: 1px solid var(--border-color);
   border-radius: 6px;
+  /* padding: 4px; */
 }
 
 /* Table */
@@ -217,25 +218,31 @@ html, body, #root {
   /* box-shadow: inset 0 0 5px var(--highlight-color); */
 }
 
-/* Error Message Styling */
-.error-message {
-  color: var(--error-color);
-  background: #1a1a2e;
-  padding: 12px;
+/* Messages (info/warning/error) */
+.result-grid .info-message,
+.result-grid .warning,
+.result-grid .error-message {
+  padding: 10px 12px;
   border-radius: 4px;
+  margin: 7px 0px;
+  /* font-size: 13px; */
   overflow-x: auto;
   font-family: var(--font);
-  /* font-size: 14px; */
 }
 
-.info-message {
+.result-grid .info-message {
   color: var(--highlight-color-2);
   background: #1a1a2e;
-  padding: 12px;
-  border-radius: 4px;
-  overflow-x: auto;
-  font-family: var(--font);
-  /* font-size: 14px; */
+}
+
+.result-grid .warning {
+  color: var(--highlight-color);
+  background: #1a1a2e;
+}
+
+.result-grid .error-message {
+  color: var(--error-color);
+  background: #1a1a2e;
 }
 
 /* --- TableList --- */

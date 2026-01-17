@@ -44,3 +44,9 @@ class Select(ASTNode):
     columns: List[Column]
     table: str
     where: Union[BinaryExpression, None] = None
+
+
+@dataclass
+class ShowTables(ASTNode):
+    """Represents a SHOW TABLES statement."""
+    pass

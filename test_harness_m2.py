@@ -1,10 +1,17 @@
+import sys
+import os
+
+# Add project root to sys.path
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, PROJECT_ROOT)
+
+# Now you can import modules relative to project root
 from engine.sql.tokenizer import Tokenizer
 from engine.sql.parser import Parser
-from engine.storage_engine import StorageEngine
-from engine.query import build_plan, execute_plan, Catalog
+from engine.engine import Engine
+from backend.app.db.query import build_plan, execute_plan # File accessed outside engine
 
 
-# --- Helper function: parse SQL into AST ---
 def parse_sql(sql: str):
     tokenizer = Tokenizer(sql)
     tokens = tokenizer.tokenize()
@@ -12,11 +19,10 @@ def parse_sql(sql: str):
     return parser.parse()
 
 
-# --- Test harness ---
 def main():
-    print("=== Milestone 2 SQL Pipeline Test ===")
-    storage = StorageEngine()
-    catalog = Catalog(storage)
+    print("=== Milestone 2 SQL Pipeline Test (Engine-backed) ===")
+
+    engine = Engine()
 
     sql_statements = [
         "CREATE TABLE users (id INT, name TEXT, age INT);",
@@ -32,13 +38,15 @@ def main():
         try:
             ast = parse_sql(sql)
             plan = build_plan(ast)
-            result = execute_plan(plan, catalog)
+            result = execute_plan(plan, engine)
+
             if result:
                 print("Result:")
                 for row in result:
                     print(row)
             else:
                 print("Executed successfully (no output).")
+
         except Exception as e:
             print("Error:", e)
 

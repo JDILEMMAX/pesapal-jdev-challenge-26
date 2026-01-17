@@ -15,8 +15,8 @@ class Token(NamedTuple):
     value: str
 
 
-KEYWORDS = {"CREATE", "TABLE", "INSERT", "INTO", "VALUES", "SELECT", "FROM", "WHERE"}
-SYMBOLS = {"(", ")", ",", ";", "=", "<", ">"}
+KEYWORDS = {"CREATE", "TABLE", "TABLES", "INSERT", "INTO", "VALUES", "SELECT", "FROM", "WHERE", "SHOW"}
+SYMBOLS = {"(", ")", ",", ";", "=", "<", ">", "*"}
 
 
 class Tokenizer:

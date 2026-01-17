@@ -11,6 +11,14 @@ class Record:
     def __init__(self, schema: TableSchema):
         self.schema = schema
 
+    @staticmethod
+    def from_values(schema: TableSchema, values: list) -> bytes:
+        """
+        Factory method expected by Engine.
+        """
+        record = Record(schema)
+        return record.encode(values)
+
     def encode(self, row: List) -> bytes:
         """
         Encode a row into bytes.

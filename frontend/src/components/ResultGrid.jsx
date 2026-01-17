@@ -2,36 +2,61 @@ export default function ResultGrid({ result, error }) {
   let content;
 
   if (error) {
-    content = <pre className="error-message">{error}</pre>;
-  } else if (!result || (Array.isArray(result) && result.length === 0)) {
-    content = <div className="error-message">No results</div>;
-  } else if (Array.isArray(result)) {
-    const columns = Object.keys(result[0] || {});
+    content = <div className="error-message">{error}</div>;
+  } else if (!result) {
+    content = <div className="info-message">No results yet</div>;
+  } else {
+    const data = Array.isArray(result)
+      ? result
+      : Array.isArray(result.data)
+      ? result.data
+      : [];
+
+    const message = result?.message;
+    const warning = result?.warning;
 
     content = (
-      <div className="result-table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              {columns.map((col) => (
-                <th key={col}>{col}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((row, idx) => (
-              <tr key={idx}>
-                {columns.map((col) => (
-                  <td key={col}>{String(row[col])}</td>
+      <>
+        {/* Informational message */}
+        {message && <div className="info-message">{message}</div>}
+
+        {/* Row count */}
+        {data.length > 0 && (
+          <div className="info-message">
+            {data.length} row{data.length > 1 ? "s" : ""}
+          </div>
+        )}
+
+        {/* Result table */}
+        {data.length > 0 ? (
+          <div className="result-table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  {Object.keys(data[0]).map((col) => (
+                    <th key={col}>{col}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row, idx) => (
+                  <tr key={idx}>
+                    {Object.keys(row).map((col) => (
+                      <td key={col}>{String(row[col])}</td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          !message && <div className="info-message">Query executed successfully (0 rows)</div>
+        )}
+
+        {/* Warning message */}
+        {warning && <div className="warning">{warning}</div>}
+      </>
     );
-  } else {
-    content = <pre className="info-message">{String(result)}</pre>;
   }
 
   return (

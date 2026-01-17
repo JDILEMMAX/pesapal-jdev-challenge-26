@@ -2,11 +2,11 @@ from .base import Executor
 
 
 class InsertExecutor(Executor):
-    def __init__(self, storage_engine, table, values):
-        self.storage_engine = storage_engine
-        self.table = table
+    def __init__(self, engine, table_name, values):
+        self.engine = engine
+        self.table_name = table_name
         self.values = [v.value for v in values]
 
     def execute(self):
-        self.storage_engine.insert_row(self.table, self.values)
+        self.engine.insert_row(self.table_name, self.values)
         return {"status": "OK"}

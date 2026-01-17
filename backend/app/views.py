@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from app.db.session import get_session
 from .auth import auth_required
 from .decorators import handle_engine_errors
+from collections.abc import Iterator
+
 
 logger = logging.getLogger("app")
 
@@ -30,24 +32,31 @@ def extract_sql(request):
 
 def normalize_result(sql: str, result):
     """
-    Normalize engine results into JSON-safe responses.
+    Session already returns normalized payloads.
+    This function is now a pass-through.
     """
-    # SELECT queries → return rows directly
-    if isinstance(result, list):
-        return result
 
     sql_upper = sql.strip().upper()
 
+    # SELECT
+    if sql_upper.startswith("SELECT"):
+        return result
+
     # CREATE TABLE
     if sql_upper.startswith("CREATE TABLE"):
-        return "Table created successfully"
+        return {
+            "message": "Table created successfully",
+            **result
+        }
 
     # INSERT
     if sql_upper.startswith("INSERT"):
-        return "Insert executed successfully"
+        return {
+            "message": "Insert executed successfully",
+            **result
+        }
 
-    # Fallback (safe string)
-    return str(result)
+    return result
 
 # This prevents Django from blocking POST requests from curl
 @csrf_exempt

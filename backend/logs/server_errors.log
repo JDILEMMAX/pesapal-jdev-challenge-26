@@ -1,0 +1,844 @@
+2026-01-16 03:39:12,444 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 03:39:38,834 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 64, in execute
+    return self.engine.get_rows(table_name)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'get_rows'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: 'Engine' object has no attribute 'get_rows'
+2026-01-16 03:39:50,273 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 64, in execute
+    return self.engine.get_rows(table_name)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'get_rows'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: 'Engine' object has no attribute 'get_rows'
+2026-01-16 03:40:13,874 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 03:48:42,452 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 04:01:19,882 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 05:00:48,083 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 64, in execute
+    return self.engine.get_rows(table_name)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'get_rows'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: 'Engine' object has no attribute 'get_rows'
+2026-01-16 05:01:50,109 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 64, in execute
+    return self.engine.get_rows(table_name)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'get_rows'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: 'Engine' object has no attribute 'get_rows'
+2026-01-16 05:03:26,667 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 64, in execute
+    return self.engine.get_rows(table_name)
+           ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'get_rows'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: 'Engine' object has no attribute 'get_rows'
+2026-01-16 05:16:58,082 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 05:36:06,941 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 06:10:58,143 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 06:11:03,449 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 06:11:26,680 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 20, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 28, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:17:50,016 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 20, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 28, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:22:05,899 [ERROR] app: EngineError: Table users does not exist | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+2026-01-16 06:22:17,017 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 99, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 103, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:22:35,844 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 99, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 103, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:22:42,342 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 99, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 103, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:23:34,101 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 54, in insert_row
+    record_bytes = Record.from_values(schema, values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 99, in from_values
+    return record.encode(values)
+           ~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 103, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 63, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 06:26:36,621 [ERROR] app: EngineError: Expected 3 values, got 4 | SQL: INSERT INTO users VALUES (1, 'Alice', 30,70);
+2026-01-16 06:38:33,437 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 06:41:53,795 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 14:50:44,073 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 14:50:51,923 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 14:51:10,747 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 95, in insert_row
+    encoded = record.encode(values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 28, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 14:51:56,931 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 58, in execute
+    self.engine.insert_row(table_name, values)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 95, in insert_row
+    encoded = record.encode(values)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\record\record.py", line 28, in encode
+    raise ValueError("Row does not match schema")
+ValueError: Row does not match schema
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Row does not match schema
+2026-01-16 14:54:18,357 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 40, in execute
+    self.engine.create_table(table_name, columns)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 38, in create_table
+    ColumnSchema(name=c, col_type=str, nullable=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ColumnSchema.__init__() got an unexpected keyword argument 'col_type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: ColumnSchema.__init__() got an unexpected keyword argument 'col_type'
+2026-01-16 14:54:26,126 [ERROR] app: EngineError: Table users does not exist | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+2026-01-16 15:09:30,043 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 15:09:35,488 [ERROR] app: EngineError: Unsupported SQL type: D | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 15:09:45,216 [ERROR] app: EngineError: Table users does not exist | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+2026-01-16 15:18:07,746 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 15:18:14,419 [ERROR] app: EngineError: Table users does not exist | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+2026-01-16 15:18:23,019 [ERROR] app: EngineError: Unsupported SQL type: D | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 16:12:40,307 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 16:12:43,491 [ERROR] app: EngineError: Unsupported SQL type: D | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 16:13:11,463 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 16:13:15,456 [ERROR] app: EngineError: Unsupported SQL type: D | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 16:16:48,529 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id INT,
+    name TEXT,
+    age INT);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 40, in execute
+    self.engine.create_table(table_name, columns)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\engine.py", line 48, in create_table
+    for name, sql_type in columns:
+        ^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 75, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: too many values to unpack (expected 2)
+2026-01-16 16:20:50,635 [ERROR] app: EngineError: Table users does not exist | SQL: SELECT * FROM users;
+2026-01-16 16:21:13,365 [ERROR] app: EngineError: Table FROM does not exist | SQL: SELECT name, age FROM users WHERE age > 28;
+2026-01-16 16:21:44,176 [ERROR] app: EngineError: Table FROM does not exist | SQL: SELECT name, age FROM users WHERE age > 28;
+2026-01-16 16:29:42,668 [ERROR] app: Unexpected InternalError | SQL: SELECT name, age FROM users WHERE age > 28;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 118, in execute
+    ast = parser.parse()  # get AST for this statement
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 118, in _parse_select
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 134, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 16:30:03,446 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id INT, name TEXT, age INT);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 118, in execute
+    ast = parser.parse()  # get AST for this statement
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 58, in _parse_create
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 134, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 16:31:49,118 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 113, in execute
+    tokens = tokenizer.tokenize()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\tokenizer.py", line 74, in tokenize
+    raise SyntaxError(f"Unexpected character: '{current}'")
+SyntaxError: Unexpected character: '*'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Unexpected character: '*'
+2026-01-16 16:37:37,951 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 93, in _parse_select
+    raise SyntaxError("Expected column name in SELECT")
+SyntaxError: Expected column name in SELECT
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected column name in SELECT
+2026-01-16 16:38:01,501 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 93, in _parse_select
+    raise SyntaxError("Expected column name in SELECT")
+SyntaxError: Expected column name in SELECT
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected column name in SELECT
+2026-01-16 16:50:27,630 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 16:55:12,307 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 93, in _parse_select
+    raise SyntaxError("Expected column name in SELECT")
+SyntaxError: Expected column name in SELECT
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected column name in SELECT
+2026-01-16 16:56:15,837 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 16:59:22,883 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 93, in _parse_select
+    raise SyntaxError("Expected column name in SELECT")
+SyntaxError: Expected column name in SELECT
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected column name in SELECT
+2026-01-16 17:01:46,641 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 17:07:00,807 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 17:25:56,782 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age);
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 49, in _parse_create
+    col_type = self._expect(TokenType.IDENTIFIER).value
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.IDENTIFIER 'None', got TokenType.SYMBOL ','
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.IDENTIFIER 'None', got TokenType.SYMBOL ','
+2026-01-16 17:30:28,913 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 113, in execute
+    tokens = tokenizer.tokenize()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\tokenizer.py", line 74, in tokenize
+    raise SyntaxError(f"Unexpected character: '{current}'")
+SyntaxError: Unexpected character: '*'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Unexpected character: '*'
+2026-01-16 17:30:44,230 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 17:31:36,543 [ERROR] app: Unexpected InternalError | SQL: SELECT * FROM users
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 34, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 126, in _parse_select
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 17:48:57,370 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 17:49:08,341 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age)
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 66, in _parse_create
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 17:54:03,259 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 17:54:05,792 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age)
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 66, in _parse_create
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 18:03:41,040 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 18:03:47,436 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:05:31,593 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:05:43,186 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age)
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 66, in _parse_create
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 18:06:30,556 [ERROR] app: Unexpected InternalError | SQL: CREATE TABLE users (id, name, age)
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 30, in parse
+    return self._parse_create()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 66, in _parse_create
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 18:07:54,770 [ERROR] app: Unexpected InternalError | SQL: INSERT INTO users VALUES (1, 'Alice', 30)
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 115, in execute
+    ast = parser.parse()  # <-- now parser sees the trailing ';'
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 32, in parse
+    return self._parse_insert()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 90, in _parse_insert
+    self._expect(TokenType.SYMBOL, ";")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 68, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 126, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.SYMBOL ';', got TokenType.EOF ''
+2026-01-16 18:08:16,413 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:16:07,163 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:39:35,968 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:44:18,142 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 18:47:00,439 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 19:49:50,634 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 20:00:43,076 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 20:03:57,516 [ERROR] app: EngineError: Table USERS does not exist | SQL: INSERT INTO users VALUES (1, 'Alice', 30);
+2026-01-16 20:04:14,896 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 20:06:52,355 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 20:11:05,903 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 20:30:51,699 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 20:33:48,618 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 20:42:08,805 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 21:25:17,958 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 21:29:43,573 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-16 21:37:38,256 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 21:38:35,580 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age);
+2026-01-16 21:54:20,245 [ERROR] app: Unexpected InternalError | SQL: SHOW TABLES;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 116, in execute
+    ast = parser.parse()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 41, in parse
+    return self._parse_show_tables()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 148, in _parse_show_tables
+    self._expect(TokenType.KEYWORD, "SHOW")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 72, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 140, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+2026-01-16 21:54:28,099 [ERROR] app: Unexpected InternalError | SQL: SHOW TABLE;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 116, in execute
+    ast = parser.parse()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 41, in parse
+    return self._parse_show_tables()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 148, in _parse_show_tables
+    self._expect(TokenType.KEYWORD, "SHOW")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 72, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 140, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+2026-01-16 22:01:24,845 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 22:01:31,518 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 22:01:33,275 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 22:01:34,456 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 22:01:43,609 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 22:06:50,478 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 23:39:30,585 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 23:56:19,026 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-16 23:56:29,480 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 00:33:24,722 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age)
+2026-01-17 00:45:52,440 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-17 00:46:18,296 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 00:46:24,428 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 01:53:46,260 [WARNING] app: Invalid request: Invalid JSON body
+2026-01-17 02:00:47,567 [ERROR] app: Unexpected InternalError | SQL: SHOW TABLES;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 116, in execute
+    ast = parser.parse()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 41, in parse
+    return self._parse_show_tables()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 148, in _parse_show_tables
+    self._expect(TokenType.KEYWORD, "SHOW")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 22, in _expect
+    raise SyntaxError(
+        f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
+    )
+SyntaxError: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 72, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 140, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected TokenType.KEYWORD 'SHOW', got TokenType.IDENTIFIER 'SHOW'
+2026-01-17 02:18:14,975 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age)
+2026-01-17 02:27:22,667 [ERROR] app: EngineError: Table USERS already exists | SQL: CREATE TABLE users (id, name, age);
+2026-01-17 05:36:57,560 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-17 06:36:34,052 [WARNING] app: Invalid request: Invalid JSON body
+2026-01-17 06:37:15,374 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 06:41:17,451 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 06:53:18,267 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users
+2026-01-17 07:05:59,927 [ERROR] app: EngineError: Table USERS does not exist | SQL: SELECT * FROM users;
+2026-01-17 07:12:53,361 [ERROR] app: Unexpected InternalError | SQL: SELECT FROM users WHERE age > 29;
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 35, in execute
+    ast = parser.parse()
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 39, in parse
+    return self._parse_select()
+           ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\engine\sql\parser.py", line 116, in _parse_select
+    raise SyntaxError("Expected column name or '*' in SELECT")
+SyntaxError: Expected column name or '*' in SELECT
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\decorators.py", line 12, in wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\views.py", line 72, in query_endpoint
+    raw_result = session.execute(sql)
+  File "C:\Users\KAMIKAZE\Desktop\JDEV Challenge\backend\app\db\session.py", line 59, in execute
+    raise RuntimeError(f"SQL execution failed: {e}") from e
+RuntimeError: SQL execution failed: Expected column name or '*' in SELECT

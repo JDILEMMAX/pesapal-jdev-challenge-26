@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function SqlEditor({ onExecute, isExecuting }) {
-  const [sql, setSql] = useState("");
+export default function SqlEditor({ sql, setSql, onExecute, isExecuting }) {
   const textareaRef = useRef(null);
 
   // Keyboard shortcut: Ctrl / Cmd + Enter

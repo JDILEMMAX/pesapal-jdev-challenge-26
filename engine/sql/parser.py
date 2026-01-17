@@ -23,6 +23,11 @@ class Parser:
                 f"Expected {token_type} '{value}', got {tok.type} '{tok.value}'"
             )
         return tok
+    
+    def _consume_optional_semicolon(self):
+        """Advance past a semicolon if present; do nothing if not."""
+        if self._peek().type == TokenType.SYMBOL and self._peek().value == ";":
+            self._advance()
 
     def parse(self) -> ASTNode:
         tok = self._peek()
@@ -32,6 +37,8 @@ class Parser:
             return self._parse_insert()
         elif tok.value.upper() == "SELECT":
             return self._parse_select()
+        elif tok.value.upper() == "SHOW":
+            return self._parse_show_tables()
         else:
             raise SyntaxError(f"Unsupported statement: {tok.value}")
 
@@ -45,9 +52,17 @@ class Parser:
         columns = []
 
         while True:
+            # Parse column name
             col_name = self._expect(TokenType.IDENTIFIER).value
-            col_type = self._expect(TokenType.IDENTIFIER).value
-            columns.append((col_name, col_type.upper()))
+
+            # Optional type
+            tok = self._peek()
+            if tok.type == TokenType.IDENTIFIER:
+                col_type = self._advance().value.upper()
+            else:
+                col_type = "TEXT"  # default type
+
+            columns.append((col_name, col_type))
 
             tok = self._peek()
             if tok.value == ")":
@@ -55,7 +70,9 @@ class Parser:
                 break
             self._expect(TokenType.SYMBOL, ",")
 
-        self._expect(TokenType.SYMBOL, ";")
+        # Optional semicolon
+        self._consume_optional_semicolon()
+        
         return CreateTable(name=table_name, columns=columns)
 
     # --------------------------
@@ -79,7 +96,9 @@ class Parser:
                 break
             self._expect(TokenType.SYMBOL, ",")
 
-        self._expect(TokenType.SYMBOL, ";")
+        # Optional semicolon
+        self._consume_optional_semicolon()
+
         return Insert(table=table_name, values=values)
 
     # --------------------------
@@ -89,9 +108,12 @@ class Parser:
 
         while True:
             tok = self._advance()
-            if tok.type != TokenType.IDENTIFIER:
-                raise SyntaxError("Expected column name in SELECT")
-            columns.append(Column(tok.value))
+
+            # Accept identifier or "*" for SELECT *
+            if tok.type == TokenType.IDENTIFIER or tok.value == "*":
+                columns.append(Column(tok.value))
+            else:
+                raise SyntaxError("Expected column name or '*' in SELECT")
 
             tok = self._peek()
             if tok.value.upper() == "FROM":
@@ -104,6 +126,7 @@ class Parser:
         self._expect(TokenType.KEYWORD, "FROM")
         table_name = self._expect(TokenType.IDENTIFIER).value
 
+        # Optional WHERE clause
         where_clause = None
         if self._peek().value.upper() == "WHERE":
             self._advance()
@@ -115,5 +138,14 @@ class Parser:
             right = Literal(right_tok.value)
             where_clause = BinaryExpression(left, op, right)
 
-        self._expect(TokenType.SYMBOL, ";")
+        # Optional semicolon (EOF allowed)
+        self._consume_optional_semicolon()
+
         return Select(columns=columns, table=table_name, where=where_clause)
+
+    # --------------------------
+    def _parse_show_tables(self) -> 'ShowTables':
+        self._expect(TokenType.KEYWORD, "SHOW")
+        self._expect(TokenType.KEYWORD, "TABLES")
+        self._consume_optional_semicolon()
+        return ShowTables()

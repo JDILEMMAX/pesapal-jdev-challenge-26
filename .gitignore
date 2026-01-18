@@ -1,0 +1,35 @@
+# --------------------------------------------------------------------
+# Python bytecode & cache files
+#
+# SETUP (run once):
+# 1. Create this file in the project root: .gitignore
+# 2. Add the ignore rules below
+# 3. Stage and commit it:
+#      git add .gitignore
+#      git commit -m "chore(gitignore): ignore Python cache files"
+#
+# Python automatically generates __pycache__/ directories and
+# *.pyc/*.pyo/*.pyd bytecode files at runtime. These files are
+# platform- and version-specific, regenerated as needed, and should
+# never be committed to version control.
+#
+# The ignore patterns below apply recursively to the entire repository,
+# meaning any matching files or directories in any subfolder are
+# ignored.
+#
+# IMPORTANT:
+# .gitignore does NOT remove files that are already tracked.
+# If Python cache files were committed before this file was added,
+# remove them from Git *after* adding this .gitignore using:
+#
+#   git rm -r --cached __pycache__
+#   git rm --cached *.pyc *.pyo *.pyd
+#
+# Then commit the cleanup:
+#   git commit -m "chore(gitignore): remove tracked Python cache files"
+# --------------------------------------------------------------------
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

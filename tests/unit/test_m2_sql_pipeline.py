@@ -1,15 +1,18 @@
-import sys
 import os
+import sys
 
-# Add project root to sys.path
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, PROJECT_ROOT)
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 # Now you can import modules relative to project root
 from engine.sql.tokenizer import Tokenizer
 from engine.sql.parser import Parser
 from engine.engine import Engine
-from backend.app.db.query import build_plan, execute_plan # File accessed outside engine
+from backend.app.db.query import build_plan, execute_plan
+# query.py can be accessed while outside engine since project root was added to sys.path
 
 
 def parse_sql(sql: str):

@@ -1,4 +1,11 @@
-# test_harness_m3.py
+import os
+import sys
+
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 import bisect
 from engine.storage.table import Table  # Milestone 2 table

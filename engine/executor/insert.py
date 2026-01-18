@@ -9,4 +9,4 @@ class InsertExecutor(Executor):
 
     def execute(self):
         self.engine.insert_row(self.table_name, self.values)
-        return {"status": "OK"}
+        return []

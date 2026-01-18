@@ -38,25 +38,25 @@ def normalize_result(sql: str, result):
 
     sql_upper = sql.strip().upper()
 
-    # SELECT
-    if sql_upper.startswith("SELECT"):
-        return result
+    payload = {
+        "data": result.get("data", [])
+    }
 
-    # CREATE TABLE
+    # propagate warning if present
+    if "warning" in result:
+        payload["warning"] = result["warning"]
+
     if sql_upper.startswith("CREATE TABLE"):
-        return {
-            "message": "Table created successfully",
-            **result
-        }
+        payload["message"] = "Table created successfully"
 
-    # INSERT
-    if sql_upper.startswith("INSERT"):
-        return {
-            "message": "Insert executed successfully",
-            **result
-        }
+    elif sql_upper.startswith("INSERT"):
+        payload["message"] = "Insert executed successfully"
 
-    return result
+    elif sql_upper.startswith("SHOW TABLES"):
+        if not payload["data"]:
+            payload["message"] = "No tables found"
+
+    return payload
 
 # This prevents Django from blocking POST requests from curl
 @csrf_exempt

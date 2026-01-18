@@ -1,4 +1,12 @@
 import os
+import sys
+
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+)
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from tempfile import NamedTemporaryFile
 
 from engine.storage.file_manager import FileManager
@@ -13,17 +21,17 @@ from engine.catalog.catalog import Catalog
 def run_test():
     print("=== Milestone 1 Core Storage Engine Test Harness ===")
 
-    # 1️⃣ Create a temporary file to simulate disk
+    # Create a temporary file to simulate disk
     with NamedTemporaryFile(delete=False) as tmpfile:
         file_path = tmpfile.name
 
     print(f"Temporary storage file: {file_path}")
 
-    # 2️⃣ Initialize FileManager and Pager
+    # Initialize FileManager and Pager
     fm = FileManager(file_path)
     pager = Pager(fm, page_size=128)  # small page for testing
 
-    # 3️⃣ Create a table schema
+    # Create a table schema
     columns = [
         ColumnSchema("id", int, False),
         ColumnSchema("name", str, False),
@@ -32,7 +40,7 @@ def run_test():
     schema = TableSchema(columns)
     record_handler = Record(schema)
 
-    # 4️⃣ Encode some records and write to pages
+    # Encode some records and write to pages
     rows = [[1, "Alice", 100.5], [2, "Bob", None], [3, "Charlie", 250.0]]
 
     for i, row in enumerate(rows):
@@ -42,14 +50,14 @@ def run_test():
         pager.flush_page(i)
         print(f"Written row {i} to page {i}: {row}")
 
-    # 5️⃣ Read back records and decode
+    # Read back records and decode
     for i in range(len(rows)):
         page = pager.get_page(i)
         data = page.read(0, 128)
         decoded_row = record_handler.decode(data)
         print(f"Read row {i} from page {i}: {decoded_row}")
 
-    # 6️⃣ Create catalog and register a table
+    # Create catalog and register a table
     table_columns = [
         Column("id", int, False),
         Column("name", str, False),
@@ -64,7 +72,7 @@ def run_test():
         f"Retrieved table: {retrieved_table.name}, columns: {[c.name for c in retrieved_table.columns]}"
     )
 
-    # 7️⃣ Cleanup temporary file
+    # Cleanup temporary file
     os.unlink(file_path)
     print("Temporary storage file removed.")
     print("=== Test Harness Complete ===")

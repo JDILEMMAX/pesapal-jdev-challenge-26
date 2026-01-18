@@ -27,7 +27,13 @@
 #
 # Then commit the cleanup:
 #   git commit -m "chore(gitignore): remove tracked Python cache files"
+#
+# Sanity check (after pushing)
+#   git status
+#   git status --ignored
 # --------------------------------------------------------------------
+
+# Frontend-specific ignores (Node/React) are defined in frontend/.gitignore
 
 __pycache__/
 *.pyc

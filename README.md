@@ -485,11 +485,11 @@ Future milestones will expand capabilities while preserving this separation.
 
 ## Documentation Index
 
-* api_spec.md
-* architecture.md
-* sql_subset.md
-* storage_engine.md
-* tradeoffs.md
+* [Architecture](docs/architecture.md)
+* [API Specification](docs/api_spec.md)
+* [SQL Subset](docs/sql_subset.md)
+* [Storage Engine](docs/storage_engine.md)
+* [Design Tradeoffs](docs/tradeoffs.md)
 
 ---
 

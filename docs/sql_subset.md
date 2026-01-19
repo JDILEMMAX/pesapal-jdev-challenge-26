@@ -17,6 +17,10 @@ The supported SQL subset is **minimal, explicit, and deterministic**. The goal i
 * `SELECT`
 * `DELETE`
 
+### Metadata Inspection
+
+* `SHOW TABLES`
+
 Updates are intentionally excluded to reduce complexity.
 
 ---

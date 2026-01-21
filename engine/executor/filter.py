@@ -23,7 +23,9 @@ class Filter(Executor):
         return result
 
     def _compare(self, row, col_name, op, literal, table):
-        # Find the column schema
+        col_name_lc = col_name.lower()
+
+        # Find the column schema (catalog is uppercase-safe)
         column_schema = next(
             (c for c in table.schema.columns if c.name.upper() == col_name.upper()), None
         )
@@ -32,7 +34,7 @@ class Filter(Executor):
 
         # Coerce literal to correct type
         literal_value = column_schema.dtype(literal)
-        row_value = row[col_name]
+        row_value = row[col_name_lc]
 
         # Perform comparison
         if op == "=":

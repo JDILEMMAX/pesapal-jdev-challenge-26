@@ -1,0 +1,103 @@
+from engine.sql.parser import Parser
+from engine.sql.tokenizer import Tokenizer
+from backend.app.db.query import build_plan, execute_plan
+from engine.engine import Engine
+
+
+def run_sql(engine, sql: str):
+    """Tokenize, parse, plan, and execute a SQL statement."""
+    tokenizer = Tokenizer(sql)
+    tokens = tokenizer.tokenize()
+    parser = Parser(tokens)
+    ast = parser.parse()
+    plan = build_plan(ast)
+    return execute_plan(plan, engine)
+
+
+def test_milestone_8b():
+    print("=== Milestone 8B: Basic DML & DDL ===")
+    engine = Engine()
+
+    # ---------------- CREATE TABLE ----------------
+    run_sql(engine, "CREATE TABLE users (id INTEGER, name TEXT, age INTEGER);")
+    print("Tables in catalog:", engine.catalog.tables.keys())
+    assert "USERS" in engine.catalog.tables
+
+    # ---------------- INSERT ----------------
+    run_sql(engine, "INSERT INTO users VALUES (1, 'Alice', 30);")
+    run_sql(engine, "INSERT INTO users VALUES (2, 'Bob', 25);")
+
+    rows = engine.get_rows("users")
+    print("Inserted rows:", rows)
+    assert len(rows) == 2
+
+    # Explicit content check to prevent phantom/all-null rows
+    expected_rows = [
+        {"id": 1, "name": "Alice", "age": 30},
+        {"id": 2, "name": "Bob", "age": 25},
+    ]
+    assert rows == expected_rows, "Inserted rows do not match expected rows!"
+
+    # ---------------- SELECT ----------------
+    result = run_sql(engine, "SELECT id, name, age FROM users WHERE age > 26;")
+    expected = [{"id": 1, "name": "Alice", "age": 30}]
+    assert result == expected
+
+    # ---------------- UPDATE ----------------
+    # Directly call engine.update_rows for Milestone 8B
+    result = run_sql(engine, "UPDATE users SET age = 31 WHERE id = 1;")
+
+    assert result == [{"updated": 1}]
+
+    rows = engine.get_rows("users")
+    assert any(r["age"] == 31 for r in rows if r["id"] == 1)
+
+    # ---------------- DELETE ----------------
+    # Directly call engine.delete_rows for Milestone 8B
+    result = run_sql(engine, "DELETE FROM users WHERE id = 2;")
+
+    assert result == [{"deleted": 1}]
+
+    rows = engine.get_rows("users")
+    assert len(rows) == 1 and rows[0]["id"] == 1
+
+    # ---------------- DROP TABLE ----------------
+    run_sql(engine, "DROP TABLE users;")
+    assert "USERS" not in engine.catalog.tables
+
+    print("Milestone 8B test harness passed!\n")
+
+
+def test_milestone_8c():
+    print("=== Milestone 8C: INNER JOIN ===")
+    engine = Engine()
+
+    # ---------------- CREATE TABLES ----------------
+    run_sql(engine, "CREATE TABLE users (id INTEGER, name TEXT);")
+    run_sql(engine, "CREATE TABLE orders (id INTEGER, user_id INTEGER, product TEXT);")
+
+    # ---------------- INSERT DATA ----------------
+    run_sql(engine, "INSERT INTO users VALUES (1, 'Alice');")
+    run_sql(engine, "INSERT INTO users VALUES (2, 'Bob');")
+    run_sql(engine, "INSERT INTO orders VALUES (1, 1, 'Book');")
+    run_sql(engine, "INSERT INTO orders VALUES (2, 1, 'Pen');")
+    run_sql(engine, "INSERT INTO orders VALUES (3, 2, 'Notebook');")
+
+    # ---------------- INNER JOIN ----------------
+    result = run_sql(
+        engine,
+        "SELECT id, name, product FROM users INNER JOIN orders ON id = user_id;"
+    )
+
+    expected = [
+        {"id": 1, "name": "Alice", "product": "Book"},
+        {"id": 1, "name": "Alice", "product": "Pen"},
+        {"id": 2, "name": "Bob", "product": "Notebook"},
+    ]
+    assert result == expected
+    print("Milestone 8C JOIN test passed!\n")
+
+
+if __name__ == "__main__":
+    test_milestone_8b()
+    test_milestone_8c()

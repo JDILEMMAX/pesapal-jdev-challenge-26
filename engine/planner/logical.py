@@ -35,3 +35,21 @@ class LogicalFilter(LogicalPlanNode):
 class LogicalProjection(LogicalPlanNode):
     source: LogicalPlanNode
     columns: List[Column]
+
+
+@dataclass
+class LogicalUpdate(LogicalPlanNode):
+    table: str
+    assignments: dict[str, Literal]
+    predicate: Optional[BinaryExpression] = None
+
+
+@dataclass
+class LogicalDelete(LogicalPlanNode):
+    table: str
+    predicate: Optional[BinaryExpression] = None
+
+
+@dataclass
+class LogicalDrop(LogicalPlanNode):
+    table: str

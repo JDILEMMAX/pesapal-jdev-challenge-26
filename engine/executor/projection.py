@@ -17,7 +17,19 @@ class Projection(Executor):
             # Expand '*' to all columns from the first row
             columns = list(rows[0].keys())
         else:
-            columns = [c.name for c in self.columns_ast]
+            columns = [c.name.lower() for c in self.columns_ast]
 
-        # Build projected rows
-        return [{col: row[col] for col in columns} for row in rows]
+        # Build projected rows, handling aggregate functions in column names
+        result = []
+        for row in rows:
+            projected_row = {}
+            for col in columns:
+                if col.startswith("count("):
+                    # count(*) or count(column) — use the aggregate value directly
+                    # This is already computed by GroupBy executor
+                    projected_row[col] = row.get(col)
+                else:
+                    projected_row[col] = row.get(col)
+            result.append(projected_row)
+        
+        return result

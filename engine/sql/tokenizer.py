@@ -15,7 +15,24 @@ class Token(NamedTuple):
     value: str
 
 
-KEYWORDS = {"CREATE", "TABLE", "TABLES", "INSERT", "INTO", "VALUES", "SELECT", "FROM", "WHERE", "SHOW"}
+KEYWORDS = {
+    "CREATE", "TABLE", "DROP",
+    "INSERT", "INTO", "VALUES",
+    "SELECT", "FROM", "WHERE",
+    "UPDATE", "SET", "DELETE",
+    "JOIN", "ON",
+    "GROUP", "BY", "HAVING",
+    "ORDER", "ASC", "DESC",
+    "LIMIT", "OFFSET",
+    "PRIMARY", "KEY", "NOT", "NULL",
+    "UNIQUE", "AUTO_INCREMENT",
+    "REFERENCES",
+    "INTEGER", "INT", "FLOAT",
+    "VARCHAR", "BOOLEAN", "TEXT",
+    "DATE", "TIMESTAMP",
+    "SHOW", "TABLES",
+    "INNER",
+}
 SYMBOLS = {"(", ")", ",", ";", "=", "<", ">", "*"}
 
 
@@ -63,9 +80,15 @@ class Tokenizer:
                     self._advance()
                     tokens.append(Token(TokenType.LITERAL, literal))
                 else:
+                    # Handle integers and floats
                     start = self.pos
                     while self._peek().isdigit():
                         self._advance()
+                    # Check for decimal point
+                    if self._peek() == "." and self.pos + 1 < self.length and self.sql[self.pos + 1].isdigit():
+                        self._advance()  # consume '.'
+                        while self._peek().isdigit():
+                            self._advance()
                     tokens.append(Token(TokenType.LITERAL, self.sql[start : self.pos]))
             elif current in SYMBOLS:
                 tokens.append(Token(TokenType.SYMBOL, current))

@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from engine.catalog.column import Column
-from engine.record.schema import TableSchema
-
+from engine.record.schema import TableSchema, ColumnSchema
 
 @dataclass
 class Table:
@@ -13,9 +12,14 @@ class Table:
 
     name: str
     columns: List[Column]
+    file_id: int = -1  # optional storage identifier
 
+    @property
     def schema(self) -> TableSchema:
+        """
+        Dynamically generate TableSchema from columns.
+        """
         col_schemas = [
-            TableSchema.ColumnSchema(c.name, c.dtype, c.nullable) for c in self.columns
+            ColumnSchema(c.name, c.dtype, c.nullable) for c in self.columns
         ]
         return TableSchema(col_schemas)

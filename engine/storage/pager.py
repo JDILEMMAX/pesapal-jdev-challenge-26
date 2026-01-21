@@ -1,7 +1,6 @@
 from engine.storage.page import Page
 from engine.storage.file_manager import FileManager
 from typing import Dict, Iterator
-from engine.exceptions import EngineError
 
 
 class Pager:
@@ -17,13 +16,27 @@ class Pager:
     def get_page(self, page_num: int) -> Page:
         """
         Return a page from cache or load from disk if not present.
+        Newly allocated pages are always zeroed to prevent phantom rows.
         """
         if page_num in self.cache:
             return self.cache[page_num]
 
-        data = self.file_manager.read_page(page_num, self.page_size)
+        # Attempt to read page from disk
+        try:
+            data = self.file_manager.read_page(page_num, self.page_size)
+        except FileNotFoundError:
+            data = None  # page does not exist yet
+
+        # Create a new Page in memory
         page = Page(self.page_size)
-        page.write(0, data)
+
+        if not data or all(b == 0 for b in data):
+            # New page or completely empty → zero out
+            page.clear()
+        else:
+            # Existing page → load data
+            page.write(0, data)
+
         self.cache[page_num] = page
         return page
 
@@ -37,14 +50,13 @@ class Pager:
         self.file_manager.write_page(page_num, page.data)
 
     def iter_pages(self, file_id: int) -> Iterator[Page]:
+        """
+        Iterate through pages starting from file_id until an empty page is reached.
+        """
         page_num = file_id
-
         while True:
             page = self.get_page(page_num)
-
-            # empty page → stop
             if all(b == 0 for b in page.data):
                 break
-
             yield page
             page_num += 1

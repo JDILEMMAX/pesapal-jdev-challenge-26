@@ -11,13 +11,12 @@ from tempfile import NamedTemporaryFile
 
 from engine.storage.file_manager import FileManager
 from engine.storage.pager import Pager
+from engine.storage.page import RowPage, Page
 from engine.record.schema import ColumnSchema, TableSchema
 from engine.record.record import Record
 from engine.catalog.column import Column
 from engine.catalog.table import Table
 from engine.catalog.catalog import Catalog
-from engine.record.page_layout import RowPage
-from engine.storage.page import Page
 
 
 def run_multi_row_test():

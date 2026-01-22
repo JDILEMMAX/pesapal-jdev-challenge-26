@@ -68,7 +68,7 @@ tests/
 | A | SQL Parser & AST | test_milestones.py | ✓ PASS |
 | B | DML/DDL Execution | test_milestones.py | ✓ PASS |
 | C | Constraint Enforcement | test_milestones.py | ✓ PASS |
-| D | JOIN Support | test_milestones.py | ✓ PASS |
+| D | Qualified Names & Aliases | test_milestones.py | ✓ PASS |
 | E | Query Shaping | test_milestones.py | ✓ PASS |
 | Storage | File Management | test_m1_storage.py | ✓ PASS |
 | Indexing | B-tree Indexes | test_m3_indexing.py | ✓ PASS |
@@ -235,6 +235,57 @@ Milestone C: PASSED
 - ✓ NOT NULL constraint validation
 - ✓ PRIMARY KEY uniqueness checking
 - ✓ Constraint violation error handling
+
+---
+
+### Milestone D: Qualified Column Names & Table Aliases
+
+**What to test:** Support for qualified column references and table aliases in SQL queries
+
+**Execute:**
+```bash
+python tests/unit/test_milestones.py
+```
+
+**Verify in output:**
+```
+=== Milestone D: Qualified Column Names & Table Aliases ===
+[PASS] COUNT(*) with alias works
+[PASS] Qualified column names with table aliases in JOIN works
+[PASS] Qualified columns in SELECT with JOIN works
+Milestone D: PASSED
+```
+
+**What's tested:**
+- ✓ Aggregate functions with aliases: `COUNT(*) AS count`
+- ✓ Qualified column names in SELECT: `u.name, o.product`
+- ✓ Table aliases in FROM/JOIN clauses: `FROM users u`
+- ✓ Qualified column names in JOIN ON predicates: `ON u.id = o.user_id`
+- ✓ Qualified columns in multiple SELECT statements
+- ✓ GROUP BY with unqualified column names
+
+**Example Query:**
+```sql
+SELECT id, name, COUNT(*) as count
+FROM users
+WHERE id > 0
+GROUP BY id, name
+ORDER BY count DESC
+LIMIT 10;
+```
+
+**Example Query with JOIN:**
+```sql
+SELECT u.name, o.product
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id;
+```
+
+**How it works:**
+- Tokenizer recognizes "." as a valid symbol for qualified names
+- Parser handles qualified names across all SQL clauses
+- Executors properly map qualified references to actual column data
+- Function aliases (e.g., `COUNT(*) AS count`) are correctly parsed and output
 
 ---
 
@@ -615,7 +666,7 @@ kill -9 <PID>
 
 ### Coverage Summary
 
-- **Total Test Assertions:** 40+
+- **Total Test Assertions:** 43+
 - **Test Files:** 7 active modules
 - **Pass Rate:** 100% (6/6 suites)
 - **Execution Time:** ~40 seconds
@@ -626,6 +677,7 @@ kill -9 <PID>
 - Milestone A: 4 assertions
 - Milestone B: 1 assertion
 - Milestone C: 4 assertions
+- Milestone D: 3 assertions
 - Milestone E: 8 assertions
 - Milestones 8B/8C: 9 assertions
 - Comprehensive scenario: 11 assertions

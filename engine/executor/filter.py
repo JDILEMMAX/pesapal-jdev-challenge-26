@@ -22,12 +22,20 @@ class Filter(Executor):
 
         return result
 
+    def _extract_column_name(self, col_ref):
+        """Extract column name from qualified reference (table.column -> column)"""
+        if "." in col_ref:
+            return col_ref.split(".")[1]
+        return col_ref
+
     def _compare(self, row, col_name, op, literal, table):
-        col_name_lc = col_name.lower()
+        # Extract the actual column name if it's qualified (e.g., "u.id" -> "id")
+        actual_col_name = self._extract_column_name(col_name)
+        col_name_lc = actual_col_name.lower()
 
         # Find the column schema (catalog is uppercase-safe)
         column_schema = next(
-            (c for c in table.schema.columns if c.name.upper() == col_name.upper()), None
+            (c for c in table.schema.columns if c.name.upper() == actual_col_name.upper()), None
         )
         if column_schema is None:
             raise ValueError(f"Column {col_name} does not exist in table {table.name}")

@@ -286,6 +286,75 @@ def test_milestone_e_query_shaping():
     print("Milestone E: PASSED\n")
 
 
+def test_milestone_d_qualified_names_and_aliases():
+    """Test qualified column names and table aliases (Milestone D)."""
+    print("=== Milestone D: Qualified Column Names & Table Aliases ===")
+
+    # Test 1: COUNT(*) with alias
+    engine = Engine()
+    run_sql(engine, "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT);")
+    run_sql(engine, "INSERT INTO users VALUES (1, 'Alice', 'alice@example.com');")
+
+    result = run_sql(
+        engine,
+        """SELECT id, name, COUNT(*) as count
+        FROM users
+        WHERE id > 0
+        GROUP BY id, name
+        ORDER BY count DESC
+        LIMIT 10;""",
+    )
+    expected = [{"id": 1, "name": "Alice", "count(*)": 1}]
+    assert result == expected
+    print("[PASS] COUNT(*) with alias works")
+
+    # Test 2: Qualified column names in SELECT with JOIN
+    engine2 = Engine()
+    run_sql(engine2, "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);")
+    run_sql(engine2, "CREATE TABLE orders (id INTEGER, user_id INTEGER, product TEXT);")
+    run_sql(engine2, "INSERT INTO users VALUES (1, 'Alice');")
+    run_sql(engine2, "INSERT INTO orders VALUES (101, 1, 'Laptop');")
+    run_sql(engine2, "INSERT INTO orders VALUES (102, 1, 'Mouse');")
+
+    result = run_sql(
+        engine2,
+        """SELECT u.name, o.product
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id;""",
+    )
+    expected = [
+        {"name": "Alice", "product": "Laptop"},
+        {"name": "Alice", "product": "Mouse"},
+    ]
+    assert result == expected
+    print("[PASS] Qualified column names with table aliases in JOIN works")
+
+    # Test 3: Multiple qualified columns without WHERE after JOIN
+    engine3 = Engine()
+    run_sql(engine3, "CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);")
+    run_sql(engine3, "CREATE TABLE orders (id INTEGER, customer_id INTEGER, total FLOAT);")
+    run_sql(engine3, "INSERT INTO customers VALUES (1, 'Bob');")
+    run_sql(engine3, "INSERT INTO customers VALUES (2, 'Carol');")
+    run_sql(engine3, "INSERT INTO orders VALUES (201, 1, 100.00);")
+    run_sql(engine3, "INSERT INTO orders VALUES (202, 1, 50.00);")
+    run_sql(engine3, "INSERT INTO orders VALUES (203, 2, 75.00);")
+
+    result = run_sql(
+        engine3,
+        """SELECT c.name, o.total
+        FROM customers c
+        INNER JOIN orders o ON c.id = o.customer_id;""",
+    )
+    # Should return 3 rows
+    assert len(result) == 3
+    totals = sorted([row.get("total") for row in result])
+    assert totals == [50.0, 75.0, 100.0]
+    print("[PASS] Qualified columns in SELECT with JOIN works")
+
+    print("Milestone D: PASSED\n")
+
+
+
 def test_comprehensive_scenario():
     """Comprehensive end-to-end test with all features."""
     print("=" * 80)
@@ -392,6 +461,7 @@ if __name__ == "__main__":
     test_milestone_a_sql_surface()
     test_milestone_b_dml_ddl_execution()
     test_milestone_c_constraints()
+    test_milestone_d_qualified_names_and_aliases()
     test_milestone_e_query_shaping()
     test_milestone_8b_basic_dml_ddl()
     test_milestone_8c_inner_join()

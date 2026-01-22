@@ -230,13 +230,27 @@ class Parser:
             tok = self._advance()
             if tok.type == TokenType.IDENTIFIER or tok.value == "*":
                 col_name = tok.value
+                
+                # Check for qualified column name (table.column)
+                if self._peek().value == ".":
+                    self._advance()  # consume .
+                    next_tok = self._expect(TokenType.IDENTIFIER)
+                    col_name = f"{tok.value}.{next_tok.value}"
+                
                 # Check for function call like COUNT(*)
                 if self._peek().value == "(":
                     self._advance()  # consume (
                     inner_tok = self._advance()  # get * or column name
                     self._expect(TokenType.SYMBOL, ")")
                     # Store as "FUNCTION(arg)" name
-                    col_name = f"{tok.value}({inner_tok.value})"
+                    col_name = f"{col_name}({inner_tok.value})"
+                
+                # Check for alias (AS alias_name)
+                if self._peek().value.upper() == "AS":
+                    self._advance()  # consume AS
+                    alias_tok = self._expect(TokenType.IDENTIFIER)
+                    col_name = f"{col_name} AS {alias_tok.value}"
+                
                 columns.append(Column(col_name))
             else:
                 raise SyntaxError("Expected column name or '*' in SELECT")
@@ -251,15 +265,39 @@ class Parser:
         self._expect(TokenType.KEYWORD, "FROM")
         table_name = self._expect(TokenType.IDENTIFIER).value
 
+        # Handle table alias
+        table_alias = None
+        if self._peek().type == TokenType.IDENTIFIER:
+            table_alias = self._advance().value
+        
         join_node = None
         if self._peek().value.upper() == "INNER":
             self._advance()  # consume INNER
             self._expect(TokenType.KEYWORD, "JOIN")
             right_table = self._expect(TokenType.IDENTIFIER).value
+            
+            # Handle right table alias
+            right_alias = None
+            if self._peek().type == TokenType.IDENTIFIER:
+                right_alias = self._advance().value
+            
             self._expect(TokenType.KEYWORD, "ON")
+            
+            # Parse left side of ON clause (may include table alias)
             left_col = self._expect(TokenType.IDENTIFIER).value
+            if self._peek().value == ".":
+                self._advance()  # consume .
+                left_col_name = self._expect(TokenType.IDENTIFIER).value
+                left_col = f"{left_col}.{left_col_name}"
+            
             self._expect(TokenType.SYMBOL, "=")
+            
+            # Parse right side of ON clause (may include table alias)
             right_col = self._expect(TokenType.IDENTIFIER).value
+            if self._peek().value == ".":
+                self._advance()  # consume .
+                right_col_name = self._expect(TokenType.IDENTIFIER).value
+                right_col = f"{right_col}.{right_col_name}"
 
             join_node = Join(
                 left_table=table_name,
@@ -280,6 +318,10 @@ class Parser:
             group_by = []
             while True:
                 col_name = self._expect(TokenType.IDENTIFIER).value
+                # Handle qualified column names in GROUP BY
+                if self._peek().value == ".":
+                    self._advance()  # consume .
+                    col_name = f"{col_name}.{self._expect(TokenType.IDENTIFIER).value}"
                 group_by.append(Column(col_name))
                 if self._peek().value != ",":
                     break
@@ -297,6 +339,10 @@ class Parser:
             order_by = []
             while True:
                 col_name = self._expect(TokenType.IDENTIFIER).value
+                # Handle qualified column names in ORDER BY
+                if self._peek().value == ".":
+                    self._advance()  # consume .
+                    col_name = f"{col_name}.{self._expect(TokenType.IDENTIFIER).value}"
                 direction = "ASC"
                 if self._peek().value.upper() in ["ASC", "DESC"]:
                     direction = self._advance().value.upper()
@@ -333,7 +379,12 @@ class Parser:
     # =========================
 
     def _parse_binary_expression(self) -> BinaryExpression:
-        left = Column(self._expect(TokenType.IDENTIFIER).value)
+        left_col = self._expect(TokenType.IDENTIFIER).value
+        # Handle qualified column names in WHERE clause
+        if self._peek().value == ".":
+            self._advance()  # consume .
+            left_col = f"{left_col}.{self._expect(TokenType.IDENTIFIER).value}"
+        left = Column(left_col)
         op = self._expect(TokenType.SYMBOL).value
         right_tok = self._expect(TokenType.LITERAL)
         return BinaryExpression(left, op, Literal(right_tok.value))

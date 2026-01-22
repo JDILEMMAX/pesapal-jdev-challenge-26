@@ -111,8 +111,16 @@ CREATE TABLE users (
     email TEXT
 );
 
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    product TEXT
+);
+
 -- Insert data
 INSERT INTO users VALUES (1, 'Alice', 'alice@example.com');
+
+INSERT INTO orders VALUES (101, 1, 'Laptop');
 
 -- Complex queries
 SELECT id, name, COUNT(*) as count

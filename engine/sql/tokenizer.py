@@ -31,9 +31,9 @@ KEYWORDS = {
     "VARCHAR", "BOOLEAN", "TEXT",
     "DATE", "TIMESTAMP",
     "SHOW", "TABLES",
-    "INNER",
+    "INNER", "AS",
 }
-SYMBOLS = {"(", ")", ",", ";", "=", "<", ">", "*"}
+SYMBOLS = {"(", ")", ",", ";", "=", "<", ">", "*", "."}
 
 
 class Tokenizer:

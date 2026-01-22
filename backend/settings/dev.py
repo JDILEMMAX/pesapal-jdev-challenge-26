@@ -2,12 +2,15 @@ from .base import *
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+from pathlib import Path
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
-# Ensure logs directory exists
-LOG_DIR = BASE_DIR / "logs"
+# Ensure logs directory exists at project root
+# BASE_DIR is backend/, so we need to go up one level to project root
+PROJECT_ROOT = BASE_DIR.parent
+LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
 # Configure Python logger for live console + file logging

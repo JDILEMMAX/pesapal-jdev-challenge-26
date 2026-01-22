@@ -34,7 +34,13 @@ class Engine:
 # anchors the permanent storage, and page_size governs the in-memory paging mechanics, but the default values 
 # are just fallbacks, not ownership.
 
-    def __init__(self, db_path: str = "data/dbfile", page_size: int = 4096):
+    def __init__(self, db_path=None, page_size: int = 4096):
+        if db_path is None:
+            # Use absolute path to project root data directory
+            # __file__ is in engine/, so go up 1 level to project root
+            project_root = Path(__file__).parent.parent
+            db_path = str(project_root / "data" / "dbfile")
+        
         self.catalog = Catalog()
         self.file_manager = FileManager(Path(db_path))
         self.pager = Pager(self.file_manager, page_size)

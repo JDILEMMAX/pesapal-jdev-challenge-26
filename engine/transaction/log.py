@@ -1,10 +1,17 @@
 import os
 import json
 from datetime import datetime
+from pathlib import Path
 
 
 class WALog:
-    def __init__(self, path="backend/logs/transaction.log"):
+    def __init__(self, path=None):
+        if path is None:
+            # Use absolute path to project root logs directory
+            # __file__ is in engine/transaction/, so go up 2 levels to project root
+            project_root = Path(__file__).parent.parent.parent
+            path = str(project_root / "logs" / "transaction.log")
+        
         self.path = path
 
         # Ensure log directory exists
